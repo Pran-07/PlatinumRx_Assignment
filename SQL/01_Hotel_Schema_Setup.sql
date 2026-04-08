@@ -1,6 +1,4 @@
--- ============================================================
 -- Hotel Management System - Schema Setup & Sample Data
--- ============================================================
 
 -- Drop tables if they exist (for clean re-runs)
 DROP TABLE IF EXISTS booking_commercials;
@@ -8,9 +6,7 @@ DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS users;
 
--- ============================================================
 -- TABLE: users
--- ============================================================
 CREATE TABLE users (
     user_id         VARCHAR(50) PRIMARY KEY,
     name            VARCHAR(100),
@@ -19,18 +15,14 @@ CREATE TABLE users (
     billing_address TEXT
 );
 
--- ============================================================
 -- TABLE: items
--- ============================================================
 CREATE TABLE items (
     item_id     VARCHAR(50) PRIMARY KEY,
     item_name   VARCHAR(100),
     item_rate   DECIMAL(10, 2)
 );
 
--- ============================================================
 -- TABLE: bookings
--- ============================================================
 CREATE TABLE bookings (
     booking_id      VARCHAR(50) PRIMARY KEY,
     booking_date    DATETIME,
@@ -39,9 +31,7 @@ CREATE TABLE bookings (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
--- ============================================================
 -- TABLE: booking_commercials
--- ============================================================
 CREATE TABLE booking_commercials (
     id              VARCHAR(50) PRIMARY KEY,
     booking_id      VARCHAR(50),
@@ -53,18 +43,14 @@ CREATE TABLE booking_commercials (
     FOREIGN KEY (item_id)    REFERENCES items(item_id)
 );
 
--- ============================================================
 -- SAMPLE DATA: users
--- ============================================================
 INSERT INTO users (user_id, name, phone_number, mail_id, billing_address) VALUES
 ('21wrcxuy-67erfn', 'John Doe',  '9712345678', 'john.doe@example.com',  '12, Street A, Mumbai'),
 ('user-002-abcdef', 'Jane Smith','9898765432', 'jane.smith@example.com','34, Street B, Delhi'),
 ('user-003-ghijkl', 'Bob Kumar', '9012345678', 'bob.kumar@example.com', '56, Street C, Pune'),
 ('user-004-mnopqr', 'Alice Roy',  '9123456780', 'alice.roy@example.com', '78, Street D, Nagpur');
 
--- ============================================================
 -- SAMPLE DATA: items
--- ============================================================
 INSERT INTO items (item_id, item_name, item_rate) VALUES
 ('itm-a9e8-q8fu',  'Tawa Paratha',    18.00),
 ('itm-a07vh-aer8', 'Mix Veg',         89.00),
@@ -73,9 +59,7 @@ INSERT INTO items (item_id, item_name, item_rate) VALUES
 ('itm-y456-efgh',  'Masala Chai',     30.00),
 ('itm-z789-ijkl',  'Paneer Tikka',   180.00);
 
--- ============================================================
 -- SAMPLE DATA: bookings
--- ============================================================
 INSERT INTO bookings (booking_id, booking_date, room_no, user_id) VALUES
 -- John Doe – two bookings
 ('bk-09f3e-95hj', '2021-09-23 07:36:48', 'rm-bhf9-aerjn', '21wrcxuy-67erfn'),
@@ -89,9 +73,7 @@ INSERT INTO bookings (booking_id, booking_date, room_no, user_id) VALUES
 ('bk-oct2-0005',  '2021-10-25 11:00:00', 'rm-006-ffffff', 'user-004-mnopqr'),
 ('bk-dec1-0006',  '2021-12-01 08:00:00', 'rm-007-gggggg', 'user-004-mnopqr');
 
--- ============================================================
 -- SAMPLE DATA: booking_commercials
--- ============================================================
 INSERT INTO booking_commercials (id, booking_id, bill_id, bill_date, item_id, item_quantity) VALUES
 -- Bill for bk-09f3e-95hj (Sep 2021)
 ('q34r-3q4o8-q34u', 'bk-09f3e-95hj', 'bl-0a87y-q340', '2021-09-23 12:03:22', 'itm-a9e8-q8fu',  3.0),
