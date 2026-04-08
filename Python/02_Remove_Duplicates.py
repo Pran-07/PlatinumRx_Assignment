@@ -1,32 +1,17 @@
-"""
-02_Remove_Duplicates.py
------------------------
-Remove duplicate characters from a string using a loop,
-preserving the first occurrence of each character.
-
-Examples:
-    "programming"  →  "progamin"
-    "aabbcc"       →  "abc"
-    "hello world"  →  "helo wrd"
-"""
-
-
 def remove_duplicates(input_string: str) -> str:
     """
     Return a new string with duplicate characters removed.
     Uses an explicit loop (no set/dict comprehension shortcuts).
     Preserves the order of first occurrences.
     """
-    result = ""                                # will build the unique string here
+    result = ""                                
 
-    for char in input_string:                  # iterate every character
-        if char not in result:                 # seen before? skip it
-            result = result + char             # first time seen → keep it
+    for char in input_string:                  
+        if char not in result:                 
+            result = result + char             
 
     return result
 
-
-# ── Demo / test ─────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     test_cases = [
         "programming",
@@ -35,8 +20,8 @@ if __name__ == "__main__":
         "mississippi",
         "abcabc",
         "112233",
-        "",                   # edge case: empty string
-        "a",                  # edge case: single character
+        "",                   
+        "a",                  
     ]
 
     print("Input String       →  Unique String")
@@ -44,7 +29,6 @@ if __name__ == "__main__":
     for s in test_cases:
         print(f"  {repr(s):<20} →  {repr(remove_duplicates(s))}")
 
-    # Interactive mode
     print()
     user_input = input("Enter a string to remove duplicates (or press Enter to skip): ")
     if user_input:
