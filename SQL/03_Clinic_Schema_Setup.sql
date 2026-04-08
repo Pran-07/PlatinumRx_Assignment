@@ -1,15 +1,10 @@
--- ============================================================
 -- Clinic Management System – Schema Setup & Sample Data
--- ============================================================
-
 DROP TABLE IF EXISTS expenses;
 DROP TABLE IF EXISTS clinic_sales;
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS clinics;
 
--- ============================================================
 -- TABLE: clinics
--- ============================================================
 CREATE TABLE clinics (
     cid         VARCHAR(50) PRIMARY KEY,
     clinic_name VARCHAR(100),
@@ -18,18 +13,14 @@ CREATE TABLE clinics (
     country     VARCHAR(100)
 );
 
--- ============================================================
 -- TABLE: customer
--- ============================================================
 CREATE TABLE customer (
     uid     VARCHAR(50) PRIMARY KEY,
     name    VARCHAR(100),
     mobile  VARCHAR(15)
 );
 
--- ============================================================
 -- TABLE: clinic_sales
--- ============================================================
 CREATE TABLE clinic_sales (
     oid          VARCHAR(50) PRIMARY KEY,
     uid          VARCHAR(50),
@@ -41,9 +32,7 @@ CREATE TABLE clinic_sales (
     FOREIGN KEY (cid) REFERENCES clinics(cid)
 );
 
--- ============================================================
 -- TABLE: expenses
--- ============================================================
 CREATE TABLE expenses (
     eid         VARCHAR(50) PRIMARY KEY,
     cid         VARCHAR(50),
@@ -53,9 +42,7 @@ CREATE TABLE expenses (
     FOREIGN KEY (cid) REFERENCES clinics(cid)
 );
 
--- ============================================================
 -- SAMPLE DATA: clinics
--- ============================================================
 INSERT INTO clinics (cid, clinic_name, city, state, country) VALUES
 ('cnc-0100001', 'HealthFirst Clinic',   'Mumbai',    'Maharashtra', 'India'),
 ('cnc-0100002', 'CarePoint Clinic',     'Pune',      'Maharashtra', 'India'),
@@ -64,9 +51,7 @@ INSERT INTO clinics (cid, clinic_name, city, state, country) VALUES
 ('cnc-0100005', 'CityHealth Clinic',    'Gurgaon',   'Haryana',     'India'),
 ('cnc-0100006', 'QuickCare Clinic',     'Faridabad', 'Haryana',     'India');
 
--- ============================================================
 -- SAMPLE DATA: customer
--- ============================================================
 INSERT INTO customer (uid, name, mobile) VALUES
 ('cust-001', 'Jon Doe',     '9711111111'),
 ('cust-002', 'Priya Sharma','9722222222'),
@@ -79,9 +64,7 @@ INSERT INTO customer (uid, name, mobile) VALUES
 ('cust-009', 'Ravi Kumar',  '9799999999'),
 ('cust-010', 'Sunita Das',  '9700000000');
 
--- ============================================================
 -- SAMPLE DATA: clinic_sales  (year 2021)
--- ============================================================
 INSERT INTO clinic_sales (oid, uid, cid, amount, datetime, sales_channel) VALUES
 -- Jan 2021
 ('ord-001', 'cust-001', 'cnc-0100001', 24999, '2021-01-10 10:00:00', 'online'),
@@ -114,9 +97,7 @@ INSERT INTO clinic_sales (oid, uid, cid, amount, datetime, sales_channel) VALUES
 ('ord-021', 'cust-010', 'cnc-0100006', 48000, '2021-12-03 09:00:00', 'online'),
 ('ord-022', 'cust-001', 'cnc-0100001', 62000, '2021-12-15 10:00:00', 'app');
 
--- ============================================================
 -- SAMPLE DATA: expenses  (year 2021)
--- ============================================================
 INSERT INTO expenses (eid, cid, description, amount, datetime) VALUES
 ('exp-001', 'cnc-0100001', 'first-aid supplies',  557,  '2021-01-05 07:00:00'),
 ('exp-002', 'cnc-0100001', 'staff salary',       25000, '2021-01-31 18:00:00'),
