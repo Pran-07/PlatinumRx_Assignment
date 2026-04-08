@@ -1,10 +1,5 @@
--- ============================================================
 -- Hotel Management System – Query Solutions (Part A)
--- ============================================================
-
--- ------------------------------------------------------------
 -- Q1. For every user, get user_id and last booked room_no
--- ------------------------------------------------------------
 -- Strategy: rank bookings per user by booking_date DESC,
 --           then keep only rank = 1 (the latest booking).
 -- Note: Users with no bookings at all will not appear (INNER JOIN).
@@ -27,13 +22,10 @@ INNER JOIN (
     FROM bookings
 ) b ON b.user_id = u.user_id AND b.rn = 1;
 
--- ------------------------------------------------------------
 -- Q2. booking_id and total billing amount for every booking
 --     created in November 2021
--- ------------------------------------------------------------
 -- Total bill = SUM(item_quantity * item_rate) across all
 -- booking_commercial rows that belong to a booking.
-
 SELECT
     bk.booking_id,
     ROUND(SUM(bc.item_quantity * i.item_rate), 2) AS total_billing_amount
@@ -44,10 +36,8 @@ WHERE YEAR(bk.booking_date)  = 2021
   AND MONTH(bk.booking_date) = 11          -- November
 GROUP BY bk.booking_id;
 
--- ------------------------------------------------------------
 -- Q3. bill_id and bill amount of all bills raised in
 --     October 2021 where bill amount > 1000
--- ------------------------------------------------------------
 
 SELECT
     bc.bill_id,
@@ -55,14 +45,12 @@ SELECT
 FROM booking_commercials bc
 INNER JOIN items i ON i.item_id = bc.item_id
 WHERE YEAR(bc.bill_date)  = 2021
-  AND MONTH(bc.bill_date) = 10             -- October
+  AND MONTH(bc.bill_date) = 10             
 GROUP BY bc.bill_id
 HAVING SUM(bc.item_quantity * i.item_rate) > 1000;
 
--- ------------------------------------------------------------
 -- Q4. Most ordered AND least ordered item of each month
 --     in year 2021 (by total quantity ordered)
--- ------------------------------------------------------------
 -- Step 1: compute total quantity per item per month.
 -- Step 2: rank items within each month in both directions.
 -- Step 3: keep rank-1 from each direction.
@@ -99,10 +87,8 @@ WHERE rank_most = 1 OR rank_least = 1
 GROUP BY bill_month
 ORDER BY bill_month;
 
--- ------------------------------------------------------------
 -- Q5. Customers with the second highest bill value of each
 --     month in year 2021
--- ------------------------------------------------------------
 -- "Bill value" = total amount on one bill_id.
 -- We rank bills per month; the customer who owns the 2nd
 -- highest bill in that month is our answer.
